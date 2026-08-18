@@ -89,6 +89,7 @@ describe("translateUiText", () => {
       "Auditoría del sitio · 551 páginas rastreadas · 18 ago",
     );
     expect(translateUiText("Save property")).toBe("Guardar propiedad");
+    expect(translateUiText("Select project")).toBe("Seleccionar proyecto");
     expect(translateUiText("Read pages")).toBe("Leer páginas");
     expect(translateUiText("Get search console performance")).toBe(
       "Consultar rendimiento de Search Console",

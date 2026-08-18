@@ -154,6 +154,7 @@ const manualTranslations: Record<string, string> = {
   "Rows per page": "Filas por página",
   Save: "Guardar",
   "Save property": "Guardar propiedad",
+  "Select project": "Seleccionar proyecto",
   "Save changes": "Guardar cambios",
   "Saving…": "Guardando…",
   "Saved Keywords": "Palabras clave guardadas",

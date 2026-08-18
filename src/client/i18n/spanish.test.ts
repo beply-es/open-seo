@@ -69,4 +69,18 @@ describe("translateUiText", () => {
       value: "Taking your first snapshot…",
     });
   });
+
+  it("translates dashboard coaching and generated prompt examples", () => {
+    expect(translateUiText("Show me how")).toBe("Ver cómo hacerlo");
+    expect(
+      translateUiText(
+        "Review beply.es. Ideas for what keywords we could target? Use OpenSEO",
+      ),
+    ).toBe(
+      "Revisa beply.es. ¿Qué palabras clave podríamos trabajar? Usa OpenSEO",
+    );
+    expect(translateUiText("Set up in AI & MCP →")).toBe(
+      "Configurar IA y MCP →",
+    );
+  });
 });

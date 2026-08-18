@@ -32,6 +32,7 @@ const manualTranslations: Record<string, string> = {
   Configure: "Configurar",
   Connect: "Conectar",
   "Connect with Google": "Conectar con Google",
+  "Connect your AI agent": "Conecta tu agente de IA",
   "Connect GA4 to understand what organic visitors do after they land on your site.":
     "Conecta GA4 para saber qué hacen los visitantes orgánicos después de llegar a tu sitio.",
   "Connect GSC to see how your website is actually performing in Google Search.":
@@ -133,6 +134,7 @@ const manualTranslations: Record<string, string> = {
   Projects: "Proyectos",
   "Project settings": "Ajustes del proyecto",
   "Project archived": "Proyecto archivado",
+  "Prompt copied": "Prompt copiado",
   Prompt: "Prompt",
   "Prompt Explorer": "Explorador de prompts",
   Property: "Propiedad",
@@ -162,6 +164,7 @@ const manualTranslations: Record<string, string> = {
   "Search Targeting": "Segmentación de búsqueda",
   Settings: "Ajustes",
   "Setup guides": "Guías de configuración",
+  "Set up in AI & MCP →": "Configurar IA y MCP →",
   "Setup needed: add your DataForSEO API key to use OpenSEO features. See the quick steps on the":
     "Configuración necesaria: añade tu clave API de DataForSEO para usar las funciones de OpenSEO. Consulta los pasos rápidos en la",
   "Share of Voice": "Cuota de visibilidad",
@@ -376,6 +379,32 @@ const manualTranslations: Record<string, string> = {
     "se eliminará de tu espacio de trabajo y dejará de seguir sus posiciones programadas. Puedes restaurarlo más adelante desde la página Proyectos.",
   "Failed to archive project": "No se pudo archivar el proyecto",
   "Avg position": "Posición media",
+  "Show me how": "Ver cómo hacerlo",
+  "Onboarding checklist": "Lista de primeros pasos",
+  "I already connected": "Ya está conectado",
+  "OpenSEO is designed to give your AI agent the data it needs to build a great SEO strategy and help you execute it.":
+    "OpenSEO ofrece a tu agente de IA los datos necesarios para crear una buena estrategia SEO y ayudarte a ejecutarla.",
+  "This way you aren’t limited on “AI credits”.":
+    "Así no dependes de un límite de «créditos de IA».",
+  "You can work with your agent to figure out what automations make sense for you and it can help you write content too.":
+    "Puedes trabajar con tu agente para decidir qué automatizaciones te convienen y pedirle también ayuda para redactar contenido.",
+  "Your agent is connected. Try asking it:":
+    "Tu agente está conectado. Prueba a pedirle:",
+  "Waiting for your first call — this card disappears once your agent talks to OpenSEO.":
+    "Esperando la primera llamada: esta tarjeta desaparecerá cuando tu agente se comunique con OpenSEO.",
+  "What site are you working on?": "¿En qué sitio estás trabajando?",
+  "Set your project's domain and every card on this page starts working for it — backlinks and audits.":
+    "Indica el dominio de tu proyecto para activar todas las tarjetas de esta página, incluidos los enlaces entrantes y las auditorías.",
+  "Your site's domain": "Dominio de tu sitio",
+  "Connect Search Console": "Conecta Search Console",
+  "Your real queries and clicks, straight from Google.":
+    "Consulta tus búsquedas y clics reales directamente desde Google.",
+  "Size up a competitor": "Analiza a un competidor",
+  "Paste a competitor's domain to see what they rank for and who links to them.":
+    "Introduce el dominio de un competidor para ver por qué términos posiciona y quién lo enlaza.",
+  "Open domain lookup": "Abrir análisis de dominio",
+  "Research my competitors top pages and keywords and tell me what's working. Use OpenSEO":
+    "Investiga las páginas y palabras clave principales de mis competidores y dime qué les funciona. Usa OpenSEO",
   "We could not verify your DataForSEO setup. If features are not working, check the setup steps on the":
     "No hemos podido verificar la configuración de DataForSEO. Si alguna función no responde, revisa los pasos de configuración en la",
   "You can connect Search Console and set up rank tracking after creating the project.":
@@ -513,6 +542,11 @@ const dynamicTranslations: Array<
       Number(match[1]) === 1
         ? `${match[1]} espacio de trabajo migrado al espacio compartido.`
         : `${match[1]} espacios de trabajo migrados al espacio compartido.`,
+  ],
+  [
+    /^Review (.+)\. Ideas for what keywords we could target\? Use OpenSEO$/,
+    (match) =>
+      `Revisa ${match[1]}. ¿Qué palabras clave podríamos trabajar? Usa OpenSEO`,
   ],
 ];
 

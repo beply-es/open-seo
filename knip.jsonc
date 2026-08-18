@@ -35,7 +35,17 @@
     "!.alchemy/**",
     "!badseo/**",
   ],
-  "ignore": ["drizzle-prod.config.ts"],
+  "ignore": [
+    "drizzle-prod.config.ts",
+    // Loaded implicitly by TypeScript's jsxImportSource setting.
+    "src/client/i18n/jsx-runtime.ts",
+    "src/client/i18n/jsx-dev-runtime.ts",
+  ],
+  "ignoreIssues": {
+    // TypeScript treats jsxImportSource as a module specifier, while this is
+    // an internal path alias rather than an npm dependency.
+    "tsconfig.json": ["unlisted"],
+  },
   // Disable Drizzle plugin - it tries to load drizzle.config.ts which imports cloudflare:workers
   "drizzle": false,
   "ignoreDependencies": [

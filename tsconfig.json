@@ -5,6 +5,7 @@
     "strict": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "@/client/i18n",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "lib": ["DOM", "DOM.Iterable", "ES2023"],

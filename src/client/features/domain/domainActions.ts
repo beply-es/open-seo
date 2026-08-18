@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { getStandardErrorMessage } from "@/client/lib/error-messages";
 import { captureClientEvent } from "@/client/lib/posthog";
 import type { KeywordRow } from "@/client/features/domain/types";

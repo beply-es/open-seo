@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { AlertCircle, TriangleAlert } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import {
   exportAuditLighthouseIssues,
   getAuditLighthouseIssues,

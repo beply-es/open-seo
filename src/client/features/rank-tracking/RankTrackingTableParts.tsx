@@ -1,5 +1,5 @@
 import { Sparkles } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { buildCsv, downloadCsv } from "@/client/lib/csv";
 import { exportTableToSheets } from "@/client/lib/exportToSheets";
 import { captureClientEvent } from "@/client/lib/posthog";

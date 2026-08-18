@@ -6,7 +6,7 @@ import {
   type SortingState,
 } from "@tanstack/react-table";
 import { Loader2, AlertCircle, X } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { getDomainKeywordSuggestions } from "@/serverFunctions/domain";
 import { addTrackingKeywords } from "@/serverFunctions/rank-tracking";
 import { isLabsLocationCode } from "@/client/features/keywords/locations";

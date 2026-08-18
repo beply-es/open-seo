@@ -3,6 +3,7 @@ import {
   getLanguageCode,
   getLanguageOptions,
 } from "@/client/features/keywords/locations";
+import { getSpanishLanguageName } from "@/client/i18n/displayNames";
 import type { ProjectMarket } from "@/client/features/projects/types";
 
 /**
@@ -52,7 +53,7 @@ export function ProjectMarketFields({
         >
           {languageOptions.map((option) => (
             <option key={option.code} value={option.code}>
-              {option.label}
+              {getSpanishLanguageName(option.code, option.label)}
             </option>
           ))}
         </select>

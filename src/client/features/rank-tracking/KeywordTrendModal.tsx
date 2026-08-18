@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Copy, Download, Loader2 } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { useQuery } from "@tanstack/react-query";
 import { Modal } from "@/client/components/Modal";
 import { buildCsv, downloadCsv } from "@/client/lib/csv";

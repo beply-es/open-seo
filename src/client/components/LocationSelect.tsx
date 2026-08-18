@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, Search } from "lucide-react";
+import { getSpanishCountryName } from "@/client/i18n/displayNames";
 import { LOCATION_OPTIONS } from "@/shared/keyword-locations";
 
 type LocationOption = (typeof LOCATION_OPTIONS)[number];
@@ -16,8 +17,10 @@ type Props = {
 function matches(option: LocationOption, query: string): boolean {
   const needle = query.trim().toLowerCase();
   if (!needle) return true;
+  const localizedLabel = getSpanishCountryName(option.shortLabel, option.label);
   return (
     option.label.toLowerCase().includes(needle) ||
+    localizedLabel.toLowerCase().includes(needle) ||
     option.shortLabel.toLowerCase().includes(needle)
   );
 }
@@ -41,6 +44,9 @@ export function LocationSelect({
   const listRef = useRef<HTMLUListElement>(null);
 
   const selected = options.find((option) => option.code === value) ?? null;
+  const selectedLabel = selected
+    ? getSpanishCountryName(selected.shortLabel, selected.label)
+    : "Selecciona un país";
 
   const filtered = useMemo(
     () => options.filter((option) => matches(option, query)),
@@ -112,7 +118,7 @@ export function LocationSelect({
         aria-expanded={open}
         onClick={() => setOpen((prev) => !prev)}
       >
-        <span className="truncate">{selected?.label ?? "Select country"}</span>
+        <span className="truncate">{selectedLabel}</span>
       </button>
 
       {open ? (
@@ -157,7 +163,9 @@ export function LocationSelect({
                       onClick={() => select(option)}
                       onMouseEnter={() => setActiveIndex(index)}
                     >
-                      <span className="flex-1 truncate">{option.label}</span>
+                      <span className="flex-1 truncate">
+                        {getSpanishCountryName(option.shortLabel, option.label)}
+                      </span>
                       {isSelected ? (
                         <Check className="size-4 shrink-0 text-primary" />
                       ) : null}

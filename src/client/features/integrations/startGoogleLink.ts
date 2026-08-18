@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { getStandardErrorMessage } from "@/client/lib/error-messages";
 import { authClient } from "@/lib/auth-client";
 import { isHostedClientAuthMode } from "@/lib/auth-mode";

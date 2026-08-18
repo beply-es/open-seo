@@ -1,6 +1,6 @@
 import { Check, ChevronDown, Copy } from "lucide-react";
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 
 export function Collapsible({
   id,

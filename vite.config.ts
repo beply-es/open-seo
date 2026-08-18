@@ -55,7 +55,7 @@ export default defineConfig(({ mode }) => {
       cloudflare({ inspectorPort: false, viteEnvironment: { name: "ssr" } }),
       tsConfigPaths(),
       tanstackStart(),
-      viteReact(),
+      viteReact({ jsxImportSource: "@/client/i18n" }),
       tailwindcss(),
     ],
   };

@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { getStandardErrorMessage } from "@/client/lib/error-messages";
 import {
   deleteSavedKeywordTag,

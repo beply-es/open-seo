@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from "react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import {
   copyTableToClipboard,
   GOOGLE_SHEETS_NEW_URL,

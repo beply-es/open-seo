@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { chunk, unique } from "remeda";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { getStandardErrorMessage } from "@/client/lib/error-messages";
 import { getAhrefsDomainRatings } from "@/serverFunctions/ahrefs";
 

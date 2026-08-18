@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { Copy, Download, FileSpreadsheet, Sheet } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { DomainKeywordsPagination } from "@/client/features/domain/components/DomainKeywordsPagination";
 import { DomainFilterPanel } from "@/client/features/domain/components/DomainFilterPanel";
 import { DomainPagesTable } from "@/client/features/domain/components/DomainPagesTable";

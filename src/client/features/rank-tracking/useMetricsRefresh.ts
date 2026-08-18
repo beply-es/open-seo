@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { refreshTrackingKeywordMetrics } from "@/serverFunctions/rank-tracking";
 

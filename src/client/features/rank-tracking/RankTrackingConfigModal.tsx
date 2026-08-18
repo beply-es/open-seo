@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { toast } from "sonner";
+import { toast } from "@/client/i18n/sonner";
 import { Info, Loader2, X } from "lucide-react";
 import { Modal } from "@/client/components/Modal";
 import type { RankTrackingConfig } from "@/types/schemas/rank-tracking";
@@ -17,6 +17,7 @@ import {
 import { LocationSelect } from "@/client/components/LocationSelect";
 import type { ProjectMarket } from "@/client/features/projects/types";
 import { useProjectMarket } from "@/client/features/projects/useProjectMarket";
+import { getSpanishLanguageName } from "@/client/i18n/displayNames";
 import { SearchTargetingField } from "./SearchTargetingField";
 import { KeywordSuggestionStep } from "./KeywordSuggestionStep";
 import { useSaveConfigMutations } from "./useSaveConfigMutations";
@@ -243,7 +244,7 @@ function RankTrackingConfigModalContent({
           >
             {SERP_LANGUAGE_OPTIONS.map((language) => (
               <option key={language.code} value={language.code}>
-                {language.label}
+                {getSpanishLanguageName(language.code, language.label)}
               </option>
             ))}
           </select>

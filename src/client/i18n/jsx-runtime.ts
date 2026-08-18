@@ -8,14 +8,14 @@ import { translateUiProps } from "./spanish";
 export { Fragment };
 export type { JSX } from "react/jsx-runtime";
 
-export const jsx = ((
+export const jsx = (
   type: Parameters<typeof reactJsx>[0],
-  props: Parameters<typeof reactJsx>[1],
+  props: Record<string, unknown> | null,
   key?: Parameters<typeof reactJsx>[2],
-) => reactJsx(type, translateUiProps(props), key)) as typeof reactJsx;
+) => reactJsx(type, translateUiProps(props), key);
 
-export const jsxs = ((
+export const jsxs = (
   type: Parameters<typeof reactJsxs>[0],
-  props: Parameters<typeof reactJsxs>[1],
+  props: Record<string, unknown> | null,
   key?: Parameters<typeof reactJsxs>[2],
-) => reactJsxs(type, translateUiProps(props), key)) as typeof reactJsxs;
+) => reactJsxs(type, translateUiProps(props), key);

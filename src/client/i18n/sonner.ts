@@ -3,20 +3,30 @@ import { translateUiText } from "./spanish";
 
 export { Toaster } from "sonner";
 
-function translateFirstArgument(args: unknown[]): unknown[] {
-  if (typeof args[0] !== "string") return args;
-  return [translateUiText(args[0]), ...args.slice(1)];
-}
+type SuccessMessage = Parameters<typeof baseToast.success>[0];
+type SuccessOptions = Parameters<typeof baseToast.success>[1];
+type ErrorMessage = Parameters<typeof baseToast.error>[0];
+type ErrorOptions = Parameters<typeof baseToast.error>[1];
+type InfoMessage = Parameters<typeof baseToast.info>[0];
+type InfoOptions = Parameters<typeof baseToast.info>[1];
 
-export const toast: typeof baseToast = new Proxy(baseToast, {
-  apply(target, thisArg, args: unknown[]) {
-    return Reflect.apply(target, thisArg, translateFirstArgument(args));
+export const toast = {
+  success(message: SuccessMessage, options?: SuccessOptions) {
+    return baseToast.success(
+      typeof message === "string" ? translateUiText(message) : message,
+      options,
+    );
   },
-  get(target, property, receiver) {
-    const value = Reflect.get(target, property, receiver);
-    if (typeof value !== "function") return value;
-
-    return (...args: unknown[]) =>
-      Reflect.apply(value, target, translateFirstArgument(args));
+  error(message: ErrorMessage, options?: ErrorOptions) {
+    return baseToast.error(
+      typeof message === "string" ? translateUiText(message) : message,
+      options,
+    );
   },
-});
+  info(message: InfoMessage, options?: InfoOptions) {
+    return baseToast.info(
+      typeof message === "string" ? translateUiText(message) : message,
+      options,
+    );
+  },
+};

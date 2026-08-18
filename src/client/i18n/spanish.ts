@@ -1,3 +1,4 @@
+/* eslint-disable max-lines -- the curated Spanish UI catalog is intentionally kept beside its translation rules */
 import generatedTranslations from "./spanish.generated.json";
 
 const manualTranslations: Record<string, string> = {
@@ -16,6 +17,7 @@ const manualTranslations: Record<string, string> = {
   Auto: "Automático",
   Back: "Atrás",
   Backlinks: "Enlaces entrantes",
+  "Backlink pulse": "Evolución de enlaces entrantes",
   "Backlink Spam Score": "Puntuación de spam de enlaces",
   "Brand Lookup": "Presencia de marca",
   "Broken Backlinks": "Enlaces rotos",
@@ -45,6 +47,10 @@ const manualTranslations: Record<string, string> = {
   "Could not load backlinks": "No se pudieron cargar los enlaces entrantes",
   "Could not load backlinks data.":
     "No se pudieron cargar los datos de enlaces entrantes.",
+  "Couldn’t load Search Console data. Try again shortly.":
+    "No se pudieron cargar los datos de Search Console. Vuelve a intentarlo en unos instantes.",
+  "Crawl your site for broken links, missing tags and indexability problems.":
+    "Rastrea tu sitio para detectar enlaces rotos, etiquetas ausentes y problemas de indexación.",
   Country: "País",
   Current: "Actual",
   Daily: "Diario",
@@ -109,6 +115,8 @@ const manualTranslations: Record<string, string> = {
   National: "Nacional",
   Next: "Siguiente",
   "No audits yet": "Todavía no hay auditorías",
+  "No issues found — your site looks healthy.":
+    "No se han encontrado problemas: tu sitio parece estar en buen estado.",
   "No saved keywords yet. Use the Keyword Research page to find and save keywords.":
     "Todavía no hay palabras clave guardadas. Usa la página de investigación de palabras clave para encontrarlas y guardarlas.",
   "Not connected": "Sin conectar",
@@ -132,6 +140,7 @@ const manualTranslations: Record<string, string> = {
   Rank: "Posición",
   "Rank Tracking": "Seguimiento de posiciones",
   "Referring Domains": "Dominios de referencia",
+  "Ref. domains": "Dominios ref.",
   "Referring Pages": "Páginas de referencia",
   Remove: "Quitar",
   "Remove filter": "Quitar filtro",
@@ -148,6 +157,8 @@ const manualTranslations: Record<string, string> = {
   Search: "Buscar",
   "Search Performance": "Rendimiento en búsquedas",
   "Search performance": "Rendimiento en búsquedas",
+  "Google Search Console · last 28 days":
+    "Google Search Console · últimos 28 días",
   "Search Targeting": "Segmentación de búsqueda",
   Settings: "Ajustes",
   "Setup guides": "Guías de configuración",
@@ -161,6 +172,7 @@ const manualTranslations: Record<string, string> = {
   "Spam Score": "Puntuación de spam",
   "Start New Audit": "Nueva auditoría",
   "Start Audit": "Iniciar auditoría",
+  "Run an audit": "Ejecutar una auditoría",
   Status: "Estado",
   Suggestions: "Sugerencias",
   System: "Sistema",
@@ -354,12 +366,16 @@ const manualTranslations: Record<string, string> = {
     "OpenSEO está diseñado para trabajar con agentes como Claude. Conéctalo una vez y pídele que use OpenSEO para ayudarte a desarrollar tu estrategia SEO.",
   "See your site's clicks, impressions, CTR, and position from Google Search Console.":
     "Consulta los clics, las impresiones, el CTR y la posición de tu sitio desde Google Search Console.",
+  "Taking your first snapshot…": "Creando tu primera captura…",
+  "We’ll snapshot who links to your domain — nothing to set up.":
+    "Crearemos una captura de quién enlaza a tu dominio; no tienes que configurar nada.",
   "You can't archive your only project.":
     "No puedes archivar tu único proyecto.",
   "Yes, archive project": "Sí, archivar proyecto",
   "removes it from your workspace and stops its scheduled rank tracking. You can restore it later from the Projects page.":
     "se eliminará de tu espacio de trabajo y dejará de seguir sus posiciones programadas. Puedes restaurarlo más adelante desde la página Proyectos.",
   "Failed to archive project": "No se pudo archivar el proyecto",
+  "Avg position": "Posición media",
   "We could not verify your DataForSEO setup. If features are not working, check the setup steps on the":
     "No hemos podido verificar la configuración de DataForSEO. Si alguna función no responde, revisa los pasos de configuración en la",
   "You can connect Search Console and set up rank tracking after creating the project.":
@@ -540,16 +556,19 @@ const translatablePropNames = new Set([
   "message",
   "placeholder",
   "subtitle",
+  "stamp",
   "successMessage",
   "title",
   "tooltip",
 ]);
 
-export function translateUiProps<T>(props: T): T {
+export function translateUiProps(
+  props: Record<string, unknown> | null | undefined,
+): Record<string, unknown> | null | undefined {
   if (!props || typeof props !== "object") return props;
 
   let changed = false;
-  const translated = { ...(props as Record<string, unknown>) };
+  const translated = { ...props };
   for (const [key, value] of Object.entries(translated)) {
     if (!translatablePropNames.has(key)) continue;
     if (
@@ -565,5 +584,5 @@ export function translateUiProps<T>(props: T): T {
     }
   }
 
-  return (changed ? translated : props) as T;
+  return changed ? translated : props;
 }

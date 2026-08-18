@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { translateUiText } from "./spanish";
+import { translateUiProps, translateUiText } from "./spanish";
 
 describe("translateUiText", () => {
   it("translates the primary navigation and feature names", () => {
@@ -56,5 +56,17 @@ describe("translateUiText", () => {
       ),
     ).toContain("Todavía no hay palabras clave guardadas");
     expect(translateUiText("Start Audit")).toBe("Iniciar auditoría");
+  });
+
+  it("translates display-only card metadata", () => {
+    expect(
+      translateUiProps({
+        stamp: "Taking your first snapshot…",
+        value: "Taking your first snapshot…",
+      }),
+    ).toEqual({
+      stamp: "Creando tu primera captura…",
+      value: "Taking your first snapshot…",
+    });
   });
 });

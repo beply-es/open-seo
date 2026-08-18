@@ -4,9 +4,10 @@ import { translateUiProps } from "./spanish";
 export { Fragment };
 export type { JSX } from "react/jsx-dev-runtime";
 
-export const jsxDEV = ((
+// eslint-disable-next-line max-params -- React's jsxDEV runtime contract has six positional parameters.
+export const jsxDEV = (
   type: Parameters<typeof reactJsxDev>[0],
-  props: Parameters<typeof reactJsxDev>[1],
+  props: Record<string, unknown> | null,
   key: Parameters<typeof reactJsxDev>[2],
   isStaticChildren: Parameters<typeof reactJsxDev>[3],
   source: Parameters<typeof reactJsxDev>[4],
@@ -19,4 +20,4 @@ export const jsxDEV = ((
     isStaticChildren,
     source,
     self,
-  )) as typeof reactJsxDev;
+  );

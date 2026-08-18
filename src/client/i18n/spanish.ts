@@ -8,7 +8,11 @@ const manualTranslations: Record<string, string> = {
   Apply: "Aplicar",
   "Apply filters": "Aplicar filtros",
   Archive: "Archivar",
+  "Archive project": "Archivar proyecto",
+  "Archive this project to remove it from your workspace.":
+    "Archiva este proyecto para quitarlo de tu espacio de trabajo.",
   Archived: "Archivados",
+  Archiving: "Al archivar",
   Auto: "Automático",
   Back: "Atrás",
   Backlinks: "Enlaces entrantes",
@@ -56,6 +60,8 @@ const manualTranslations: Record<string, string> = {
   Domain: "Dominio",
   "Domain Authority": "Autoridad del dominio",
   "Domain Overview": "Resumen del dominio",
+  "Analyze any domain's SEO profile: traffic, keywords, and backlinks.":
+    "Analiza el perfil SEO de cualquier dominio: tráfico, palabras clave y enlaces entrantes.",
   Done: "Hecho",
   Download: "Descargar",
   "Download CSV": "Descargar CSV",
@@ -103,6 +109,8 @@ const manualTranslations: Record<string, string> = {
   National: "Nacional",
   Next: "Siguiente",
   "No audits yet": "Todavía no hay auditorías",
+  "No saved keywords yet. Use the Keyword Research page to find and save keywords.":
+    "Todavía no hay palabras clave guardadas. Usa la página de investigación de palabras clave para encontrarlas y guardarlas.",
   "Not connected": "Sin conectar",
   Nofollow: "Nofollow",
   Overview: "Resumen",
@@ -116,6 +124,7 @@ const manualTranslations: Record<string, string> = {
   "Previous Audits": "Auditorías anteriores",
   Projects: "Proyectos",
   "Project settings": "Ajustes del proyecto",
+  "Project archived": "Proyecto archivado",
   Prompt: "Prompt",
   "Prompt Explorer": "Explorador de prompts",
   Property: "Propiedad",
@@ -151,6 +160,7 @@ const manualTranslations: Record<string, string> = {
   "Site audit": "Auditoría del sitio",
   "Spam Score": "Puntuación de spam",
   "Start New Audit": "Nueva auditoría",
+  "Start Audit": "Iniciar auditoría",
   Status: "Estado",
   Suggestions: "Sugerencias",
   System: "Sistema",
@@ -340,6 +350,16 @@ const manualTranslations: Record<string, string> = {
   "Open an issue": "Abrir una incidencia",
   "Each project is a separate workspace with its own Search Console, rank tracking, and audits.":
     "Cada proyecto es un espacio de trabajo independiente con su propio Search Console, seguimiento de posiciones y auditorías.",
+  "OpenSEO is built to be used from agents like Claude. Connect once, then ask it to use OpenSEO to help build your SEO strategy.":
+    "OpenSEO está diseñado para trabajar con agentes como Claude. Conéctalo una vez y pídele que use OpenSEO para ayudarte a desarrollar tu estrategia SEO.",
+  "See your site's clicks, impressions, CTR, and position from Google Search Console.":
+    "Consulta los clics, las impresiones, el CTR y la posición de tu sitio desde Google Search Console.",
+  "You can't archive your only project.":
+    "No puedes archivar tu único proyecto.",
+  "Yes, archive project": "Sí, archivar proyecto",
+  "removes it from your workspace and stops its scheduled rank tracking. You can restore it later from the Projects page.":
+    "se eliminará de tu espacio de trabajo y dejará de seguir sus posiciones programadas. Puedes restaurarlo más adelante desde la página Proyectos.",
+  "Failed to archive project": "No se pudo archivar el proyecto",
   "We could not verify your DataForSEO setup. If features are not working, check the setup steps on the":
     "No hemos podido verificar la configuración de DataForSEO. Si alguna función no responde, revisa los pasos de configuración en la",
   "You can connect Search Console and set up rank tracking after creating the project.":
@@ -508,6 +528,7 @@ const translatablePropNames = new Set([
   "alt",
   "aria-description",
   "aria-label",
+  "body",
   "buttonText",
   "caption",
   "children",

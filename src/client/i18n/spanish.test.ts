@@ -45,4 +45,16 @@ describe("translateUiText", () => {
     );
     expect(translateUiText("DATAFORSEO_API_KEY")).toBe("DATAFORSEO_API_KEY");
   });
+
+  it("translates dynamic project and empty-state copy", () => {
+    expect(
+      translateUiText("Archive this project to remove it from your workspace."),
+    ).toBe("Archiva este proyecto para quitarlo de tu espacio de trabajo.");
+    expect(
+      translateUiText(
+        "No saved keywords yet. Use the Keyword Research page to find and save keywords.",
+      ),
+    ).toContain("Todavía no hay palabras clave guardadas");
+    expect(translateUiText("Start Audit")).toBe("Iniciar auditoría");
+  });
 });

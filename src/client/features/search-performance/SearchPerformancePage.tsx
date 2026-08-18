@@ -335,7 +335,7 @@ export function SearchPerformancePage({ projectId }: { projectId: string }) {
                   <div className="p-4">
                     <DimensionTable
                       rows={tableRows}
-                      keyLabel={tab === "queries" ? "Query" : "Page"}
+                      keyLabel={tab === "queries" ? "Consulta" : "Página"}
                     />
                   </div>
                   <TablePagination

@@ -10,6 +10,7 @@ import {
   Undo2,
 } from "lucide-react";
 import { Markdown } from "@/client/components/Markdown";
+import { translateUiText } from "@/client/i18n/spanish";
 
 // Shared rendering for the chat agents (onboarding + SAM). The chats differ
 // only in which tools are available and how tool names become labels
@@ -28,7 +29,8 @@ export type ResolveToolLabel = (partType: string) => ToolLabel | null;
 export function humanizeToolLabel(partType: string): ToolLabel {
   const name = partType.replace(/^tool-/, "").replace(/_/g, " ");
   const label = name.charAt(0).toUpperCase() + name.slice(1);
-  return { running: label, done: label };
+  const translatedLabel = translateUiText(label);
+  return { running: translatedLabel, done: translatedLabel };
 }
 
 // Whether an assistant message already shows something — visible text, reasoning,

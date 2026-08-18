@@ -19,7 +19,7 @@ export type SearchPerformanceTableRow = Extract<
 type DimensionRow = SearchPerformanceTableRow;
 type StrikingRow = Report["strikingDistance"][number];
 
-const numberFormat = new Intl.NumberFormat("en-US");
+const numberFormat = new Intl.NumberFormat("es-ES");
 
 export function formatCount(value: number): string {
   return numberFormat.format(Math.round(value));
@@ -93,7 +93,7 @@ export function buildStrikingColumns(
     makeSelectionColumn<StrikingRow>(anchorRef),
     strikingHelper.accessor("query", {
       enableSorting: false,
-      header: () => "Query",
+      header: () => "Consulta",
       cell: ({ getValue }) => (
         <span className="block max-w-xs truncate" title={getValue()}>
           {getValue()}
@@ -102,7 +102,7 @@ export function buildStrikingColumns(
     }),
     strikingHelper.accessor("page", {
       enableSorting: false,
-      header: () => "Page",
+      header: () => "Página",
       // GSC page keys are canonical http(s) URLs of the verified property;
       // the scheme check is defense-in-depth before rendering an href.
       cell: ({ getValue }) =>

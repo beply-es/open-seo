@@ -104,7 +104,7 @@ export function formatDay(timestamp: string): string {
       : timestamp,
   );
   if (Number.isNaN(ms)) return timestamp;
-  return new Date(ms).toLocaleDateString(undefined, {
+  return new Date(ms).toLocaleDateString("es-ES", {
     month: "short",
     day: "numeric",
   });

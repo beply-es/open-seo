@@ -153,7 +153,9 @@ const manualTranslations: Record<string, string> = {
   Roadmap: "Hoja de ruta",
   "Rows per page": "Filas por página",
   Save: "Guardar",
+  "Save property": "Guardar propiedad",
   "Save changes": "Guardar cambios",
+  "Saving…": "Guardando…",
   "Saved Keywords": "Palabras clave guardadas",
   Schedule: "Frecuencia",
   Search: "Buscar",
@@ -444,6 +446,17 @@ const manualTranslations: Record<string, string> = {
     "Se ha producido un error inesperado. Revisa los registros del servidor y vuelve a intentarlo.",
   "Missing Cloudflare Access configuration: set TEAM_DOMAIN and POLICY_AUD on the deployment. See docs/SELF_HOSTING_CLOUDFLARE.md.":
     "Falta la configuración de Cloudflare Access: define TEAM_DOMAIN y POLICY_AUD en el despliegue. Consulta docs/SELF_HOSTING_CLOUDFLARE.md.",
+  "Map links": "Mapear enlaces",
+  "Read pages": "Leer páginas",
+  "Get product info": "Consultar información del producto",
+  Whoami: "Identificar la cuenta",
+  "List saved keywords": "Consultar palabras clave guardadas",
+  "Get domain keyword suggestions":
+    "Consultar sugerencias de palabras clave del dominio",
+  "Get rank tracker": "Consultar seguimiento de posiciones",
+  "Get search console performance": "Consultar rendimiento de Search Console",
+  "Get google business questions": "Consultar preguntas del negocio",
+  "Inspect urls": "Inspeccionar URL",
 };
 
 const translations: Record<string, string> = {
@@ -547,6 +560,19 @@ const dynamicTranslations: Array<
     /^Review (.+)\. Ideas for what keywords we could target\? Use OpenSEO$/,
     (match) =>
       `Revisa ${match[1]}. ¿Qué palabras clave podríamos trabajar? Usa OpenSEO`,
+  ],
+  [
+    /^Site audit · crawled (\d+) pages · (.+)$/,
+    (match) =>
+      `Auditoría del sitio · ${match[1]} páginas rastreadas · ${match[2]}`,
+  ],
+  [
+    /^Site audit · crawl in progress$/,
+    () => "Auditoría del sitio · rastreo en curso",
+  ],
+  [
+    /^Site audit · last crawl failed$/,
+    () => "Auditoría del sitio · el último rastreo falló",
   ],
 ];
 

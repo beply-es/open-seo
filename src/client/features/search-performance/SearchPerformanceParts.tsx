@@ -45,7 +45,7 @@ function strikingExportTable(report: Report): ExportTable {
   const stamp = `${report.range.startDate}-to-${report.range.endDate}`;
   return {
     filename: `search-performance-striking-distance-${stamp}.csv`,
-    headers: ["Query", "Page", "Impressions", "Clicks", "Position"],
+    headers: ["Consulta", "Página", "Impresiones", "Clics", "Posición"],
     rows: report.strikingDistance.map((row) => [
       row.query,
       row.page,
@@ -65,11 +65,11 @@ function dimensionExportTable(
   return {
     filename: `search-performance-${isPage ? "pages" : "queries"}-${stamp}.csv`,
     headers: [
-      isPage ? "Page" : "Query",
-      "Clicks",
-      "Impressions",
+      isPage ? "Página" : "Consulta",
+      "Clics",
+      "Impresiones",
       "CTR",
-      "Position",
+      "Posición",
     ],
     rows: rows.map((row) => [
       row.key,

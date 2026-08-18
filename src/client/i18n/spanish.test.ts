@@ -83,4 +83,15 @@ describe("translateUiText", () => {
       "Configurar IA y MCP →",
     );
   });
+
+  it("translates dynamic audit summaries and production-only actions", () => {
+    expect(translateUiText("Site audit · crawled 551 pages · 18 ago")).toBe(
+      "Auditoría del sitio · 551 páginas rastreadas · 18 ago",
+    );
+    expect(translateUiText("Save property")).toBe("Guardar propiedad");
+    expect(translateUiText("Read pages")).toBe("Leer páginas");
+    expect(translateUiText("Get search console performance")).toBe(
+      "Consultar rendimiento de Search Console",
+    );
+  });
 });

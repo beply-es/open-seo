@@ -9,6 +9,8 @@ const mocks = vi.hoisted(() => ({
   getOrganicOverview: vi.fn(),
   getMeasurementHealth: vi.fn(),
   getOpportunities: vi.fn(),
+  getUmamiOpportunities: vi.fn(),
+  isUmamiConfiguredForProject: vi.fn(),
   getProjectForOrganization: vi.fn(),
 }));
 
@@ -31,6 +33,16 @@ vi.mock("@/server/features/ga4/services/Ga4MeasurementHealthService", () => ({
 vi.mock("@/server/features/ga4/services/SearchOpportunityService", () => ({
   SearchOpportunityService: { getOpportunities: mocks.getOpportunities },
 }));
+vi.mock("@/server/features/umami/UmamiAnalyticsService", () => ({
+  UmamiAnalyticsService: {
+    isConfiguredForProject: mocks.isUmamiConfiguredForProject,
+  },
+}));
+vi.mock("@/server/features/umami/UmamiSearchOpportunityService", () => ({
+  UmamiSearchOpportunityService: {
+    getOpportunities: mocks.getUmamiOpportunities,
+  },
+}));
 vi.mock("@/server/features/projects/services/ProjectService", () => ({
   ProjectService: {
     getProjectForOrganization: mocks.getProjectForOrganization,
@@ -46,7 +58,9 @@ const reportResult = makeGa4ReportResult({
 
 describe("Google Analytics MCP tools", () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     mocks.runReport.mockResolvedValue(reportResult);
+    mocks.isUmamiConfiguredForProject.mockResolvedValue(false);
     mocks.getProjectForOrganization.mockResolvedValue({ id: "project_1" });
   });
 
@@ -179,6 +193,32 @@ describe("Google Analytics MCP tools", () => {
       rowCount: 1,
       totalCandidateRows: 2,
     });
+  });
+
+  it("uses Beply Analytics instead of GA4 when the project is configured", async () => {
+    mocks.isUmamiConfiguredForProject.mockResolvedValue(true);
+    mocks.getUmamiOpportunities.mockResolvedValue({
+      status: "ok",
+      rowCount: 1,
+      totalCandidateRows: 1,
+      rows: [{ page: "https://beply.es/precios/", score: 80 }],
+      coverage: { matchedRows: 1 },
+    });
+
+    const result = await tools.getSearchOpportunitiesTool.handler(
+      { projectId: "project_1", limit: 25 },
+      toolContext,
+    );
+
+    expect(mocks.getUmamiOpportunities).toHaveBeenCalledWith({
+      projectId: "project_1",
+      limit: 25,
+    });
+    expect(mocks.getOpportunities).not.toHaveBeenCalled();
+    const first = result.content[0];
+    expect(first?.type).toBe("text");
+    if (first?.type !== "text") throw new Error("Expected text content");
+    expect(first.text).toContain("matched Beply Analytics pages");
   });
 
   it.each([

@@ -14,6 +14,9 @@ import {
 } from "@/server/features/ga4/services/Ga4ReportingService";
 import { Ga4ReportError } from "@/server/lib/ga4Errors";
 import { SearchOpportunityService } from "@/server/features/ga4/services/SearchOpportunityService";
+import { UmamiAnalyticsService } from "@/server/features/umami/UmamiAnalyticsService";
+import { UmamiSearchOpportunityService } from "@/server/features/umami/UmamiSearchOpportunityService";
+import { UmamiAnalyticsError } from "@/server/lib/umamiErrors";
 import { buildProjectMeta } from "@/server/mcp/context";
 import { mcpResponse } from "@/server/mcp/formatters";
 import { looseObjectOutputSchema } from "@/server/mcp/output-schemas";
@@ -181,6 +184,9 @@ function errorResponse(
     code = error.code;
     message = error.message;
     retryAfterSeconds = error.retryAfterSeconds;
+  } else if (error instanceof UmamiAnalyticsError) {
+    code = error.code;
+    message = error.message;
   } else if (error instanceof GscNotConnectedError) {
     code = "gsc_not_connected";
     message = "Search Console is not connected for this project.";
@@ -355,7 +361,7 @@ export const getSearchOpportunitiesTool = {
   config: {
     title: "Get search opportunities",
     description:
-      "Join Search Console pages ranking in positions 4–20 with GA4 organic landing-page outcomes, then score matched opportunities by demand, business value, and reachability. Unmatched pages remain visible and unscored. Read-only and uses no OpenSEO credits.",
+      "Join Search Console pages ranking in positions 4–20 with the configured analytics provider. Beply deployments use cookie-free, aggregate Umami pageviews; GA4 remains a fallback elsewhere. Unmatched pages remain visible and unscored. Read-only and uses no OpenSEO credits.",
     inputSchema: opportunityInputSchema,
     outputSchema: opportunityOutputSchema,
     annotations: {
@@ -366,9 +372,14 @@ export const getSearchOpportunitiesTool = {
   },
   handler: withMcpProjectAuth(async (args: OpportunityArgs, context) => {
     try {
-      const result = await SearchOpportunityService.getOpportunities(args);
+      const useBeplyAnalytics =
+        await UmamiAnalyticsService.isConfiguredForProject(args.projectId);
+      const result = useBeplyAnalytics
+        ? await UmamiSearchOpportunityService.getOpportunities(args)
+        : await SearchOpportunityService.getOpportunities(args);
+      const provider = useBeplyAnalytics ? "Beply Analytics" : "GA4";
       return mcpResponse({
-        text: `Search opportunities: ${result.rowCount} returned from ${result.totalCandidateRows} candidates. ${result.coverage.matchedRows} candidates matched GA4 landing pages.`,
+        text: `Search opportunities: ${result.rowCount} returned from ${result.totalCandidateRows} candidates. ${result.coverage.matchedRows} candidates matched ${provider} pages.`,
         meta: buildProjectMeta(context, args.projectId),
         structuredContent: result,
       });

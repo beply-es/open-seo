@@ -9,6 +9,11 @@ import { objectSchema } from "@/server/mcp/output-schemas";
 import { instrumentMcpToolHandler } from "@/server/mcp/instrumentation";
 import { getBacklinksOverviewTool } from "@/server/mcp/tools/get-backlinks-overview";
 import { getBacklinksProfileTool } from "@/server/mcp/tools/get-backlinks-profile";
+import {
+  getBeplyAnalyticsEventsTool,
+  getBeplyAnalyticsOverviewTool,
+  getBeplyAnalyticsPagePerformanceTool,
+} from "@/server/mcp/tools/beply-analytics-tools";
 import { getDomainKeywordSuggestionsTool } from "@/server/mcp/tools/get-domain-keyword-suggestions";
 import { getDomainOverviewTool } from "@/server/mcp/tools/get-domain-overview";
 import { addRankTrackingKeywordsTool } from "@/server/mcp/tools/add-rank-tracking-keywords";
@@ -112,7 +117,7 @@ export function createOpenSeoMcpServer() {
       title: "OpenSEO",
       version: "0.0.11",
       description:
-        "SEO research tools for AI agents: keyword research and metrics, SERP and local SERP results, domain and backlink analysis, rank tracking, and Google Search Console performance.",
+        "SEO research tools for AI agents: keyword research and metrics, SERP and local SERP results, domain and backlink analysis, rank tracking, Google Search Console, and cookie-free aggregate Beply Analytics performance.",
       websiteUrl: "https://openseo.so",
       icons: [
         {
@@ -153,6 +158,9 @@ export function createOpenSeoMcpServer() {
   registerOpenSeoTool(server, getKeywordMetricsTool);
   registerOpenSeoTool(server, getSearchConsolePerformanceTool);
   registerOpenSeoTool(server, inspectUrlsTool);
+  registerOpenSeoTool(server, getBeplyAnalyticsOverviewTool);
+  registerOpenSeoTool(server, getBeplyAnalyticsPagePerformanceTool);
+  registerOpenSeoTool(server, getBeplyAnalyticsEventsTool);
   registerOpenSeoTool(server, getGoogleAnalyticsOrganicLandingPagesTool);
   registerOpenSeoTool(server, getGoogleAnalyticsPagePerformanceTool);
   registerOpenSeoTool(server, getGoogleAnalyticsKeyEventsTool);

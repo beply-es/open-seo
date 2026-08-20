@@ -146,7 +146,36 @@ const toolCategories: ToolCategory[] = [
     ],
   },
   {
-    label: "Google Analytics",
+    label: "Analítica Beply (sin cookies)",
+    tools: [
+      {
+        name: "get_beply_analytics_overview",
+        title: "Resumen de tráfico",
+        description:
+          "Compara páginas vistas, visitantes y visitas con el periodo anterior.",
+      },
+      {
+        name: "get_beply_analytics_page_performance",
+        title: "Rendimiento por página",
+        description:
+          "Consulta páginas vistas o páginas de entrada con datos agregados.",
+      },
+      {
+        name: "get_beply_analytics_events",
+        title: "Conversiones e interacciones",
+        description:
+          "Consulta nombres de eventos y recuentos, sin identificadores personales.",
+      },
+      {
+        name: "get_search_opportunities",
+        title: "Oportunidades de búsqueda",
+        description:
+          "Cruza la demanda de Search Console con la analítica propia de Beply.",
+      },
+    ],
+  },
+  {
+    label: "Google Analytics (opcional)",
     tools: [
       {
         name: "get_google_analytics_organic_overview",

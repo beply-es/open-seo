@@ -50,6 +50,15 @@ declare namespace Cloudflare {
     OPENROUTER_API_KEY?: string;
     // Optional OpenRouter model slug override (defaults in openrouter.ts).
     OPENROUTER_MODEL?: string;
+
+    // Optional server-to-server, aggregate-only Umami analytics provider.
+    OPENSEO_UMAMI_BASE_URL?: string;
+    OPENSEO_UMAMI_PROJECT_ID?: string;
+    OPENSEO_UMAMI_WEBSITE_ID?: string;
+    OPENSEO_UMAMI_USERNAME?: string;
+    OPENSEO_UMAMI_PASSWORD?: string;
+    OPENSEO_UMAMI_DOMAIN?: string;
+    OPENSEO_UMAMI_TIMEZONE?: string;
   }
 }
 

@@ -1,4 +1,4 @@
-export type UmamiAnalyticsErrorCode =
+type UmamiAnalyticsErrorCode =
   | "validation_error"
   | "umami_not_configured"
   | "umami_project_not_configured"

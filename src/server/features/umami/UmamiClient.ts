@@ -18,7 +18,7 @@ export const umamiConfigSchema = z.object({
 
 export type UmamiConfig = z.infer<typeof umamiConfigSchema>;
 export type UmamiDateInput = { startDate?: string; endDate?: string };
-export type UmamiResolvedDateRange = { startDate: string; endDate: string };
+type UmamiResolvedDateRange = { startDate: string; endDate: string };
 
 const aggregateStatsSchema = z.object({
   pageviews: z.number().nonnegative(),

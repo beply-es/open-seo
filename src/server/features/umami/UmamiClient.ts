@@ -14,11 +14,20 @@ export const umamiConfigSchema = z.object({
   password: z.string().min(1),
   timezone: z.string().min(1),
   domain: z.string().min(1),
+  dataStartDate: z.string().regex(DATE_PATTERN).optional(),
 });
 
 export type UmamiConfig = z.infer<typeof umamiConfigSchema>;
 export type UmamiDateInput = { startDate?: string; endDate?: string };
 type UmamiResolvedDateRange = { startDate: string; endDate: string };
+type UmamiComparisonCoverage = {
+  requestedStartDate: string;
+  requestedEndDate: string;
+  availableStartDate: string | null;
+  expectedDays: number;
+  availableDays: number;
+  complete: boolean;
+};
 
 const aggregateStatsSchema = z.object({
   pageviews: z.number().nonnegative(),
@@ -108,6 +117,40 @@ export function resolveUmamiDateRange(
     );
   }
   return range;
+}
+
+export function resolveUmamiComparisonCoverage(
+  range: UmamiResolvedDateRange,
+  dataStartDate: string,
+): UmamiComparisonCoverage {
+  if (!validDate(dataStartDate)) {
+    throw new UmamiAnalyticsError(
+      "umami_not_configured",
+      "Beply Analytics data start date is invalid.",
+    );
+  }
+
+  const expectedDays = dayCount(range);
+  const requestedEndDate = shiftDate(range.startDate, -1);
+  const requestedStartDate = shiftDate(requestedEndDate, -(expectedDays - 1));
+  const availableStartDate =
+    dataStartDate > requestedEndDate
+      ? null
+      : dataStartDate > requestedStartDate
+        ? dataStartDate
+        : requestedStartDate;
+  const availableDays = availableStartDate
+    ? dayCount({ startDate: availableStartDate, endDate: requestedEndDate })
+    : 0;
+
+  return {
+    requestedStartDate,
+    requestedEndDate,
+    availableStartDate,
+    expectedDays,
+    availableDays,
+    complete: availableDays === expectedDays,
+  };
 }
 
 function zonedMidnightEpoch(date: string, timezone: string): number {

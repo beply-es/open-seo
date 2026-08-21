@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   createUmamiClient,
+  resolveUmamiComparisonCoverage,
   resolveUmamiDateRange,
 } from "./UmamiAnalyticsService";
 
@@ -15,6 +16,22 @@ describe("Beply Analytics (Umami) service", () => {
     ).toMatchObject({
       startDate: "2026-07-23",
       endDate: "2026-08-19",
+    });
+  });
+
+  it("marks the previous period incomplete when tracking started mid-period", () => {
+    expect(
+      resolveUmamiComparisonCoverage(
+        { startDate: "2026-07-24", endDate: "2026-08-20" },
+        "2026-07-09",
+      ),
+    ).toEqual({
+      requestedStartDate: "2026-06-26",
+      requestedEndDate: "2026-07-23",
+      availableStartDate: "2026-07-09",
+      expectedDays: 28,
+      availableDays: 15,
+      complete: false,
     });
   });
 

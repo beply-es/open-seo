@@ -7,6 +7,7 @@ import {
   createUmamiClient,
   normalizeUmamiLimit,
   normalizeUmamiOffset,
+  resolveUmamiComparisonCoverage,
   resolveUmamiDateRange,
   type UmamiAggregateStats,
   type UmamiConfig,
@@ -15,7 +16,11 @@ import {
   validateUmamiBaseUrl,
 } from "./UmamiClient";
 
-export { createUmamiClient, resolveUmamiDateRange } from "./UmamiClient";
+export {
+  createUmamiClient,
+  resolveUmamiComparisonCoverage,
+  resolveUmamiDateRange,
+} from "./UmamiClient";
 
 async function loadConfig(projectId: string): Promise<UmamiConfig> {
   const configuredProjectId = await getOptionalEnvValue(
@@ -40,6 +45,7 @@ async function loadConfig(projectId: string): Promise<UmamiConfig> {
     getRequiredEnvValue("OPENSEO_UMAMI_PASSWORD"),
     getRequiredEnvValue("OPENSEO_UMAMI_DOMAIN"),
     getOptionalEnvValue("OPENSEO_UMAMI_TIMEZONE"),
+    getOptionalEnvValue("OPENSEO_UMAMI_DATA_START_DATE"),
   ]);
   const parsed = umamiConfigSchema.safeParse({
     baseUrl: values[0],
@@ -49,6 +55,7 @@ async function loadConfig(projectId: string): Promise<UmamiConfig> {
     password: values[3],
     domain: values[4],
     timezone: values[5] ?? "Europe/Madrid",
+    dataStartDate: values[6],
   });
   if (!parsed.success) {
     throw new UmamiAnalyticsError(
@@ -99,10 +106,21 @@ export const UmamiAnalyticsService = {
     const sessions = new Map(
       series.sessions.map((row) => [row.x.slice(0, 10), row.y]),
     );
+    const comparisonCoverage = config.dataStartDate
+      ? resolveUmamiComparisonCoverage(range, config.dataStartDate)
+      : null;
+    const warnings = [
+      "Beply Analytics is cookie-free; consent coverage and bot filtering can differ from Search Console.",
+    ];
+    if (comparisonCoverage && !comparisonCoverage.complete) {
+      warnings.push(
+        `Previous-period comparison is incomplete: ${comparisonCoverage.availableDays} of ${comparisonCoverage.expectedDays} days are available because Beply Analytics data starts on ${config.dataStartDate}.`,
+      );
+    }
     return {
       status: "ok" as const,
       source: publicSource(config),
-      request: { resolvedDateRange: range },
+      request: { resolvedDateRange: range, comparisonCoverage },
       current: publicStats(stats),
       previous: publicStats(stats.comparison),
       trend: series.pageviews.map((row) => ({
@@ -110,9 +128,7 @@ export const UmamiAnalyticsService = {
         pageviews: row.y,
         visits: sessions.get(row.x.slice(0, 10)) ?? 0,
       })),
-      warnings: [
-        "Beply Analytics is cookie-free; consent coverage and bot filtering can differ from Search Console.",
-      ],
+      warnings,
     };
   },
 

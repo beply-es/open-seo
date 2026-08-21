@@ -19,8 +19,8 @@ export const umamiConfigSchema = z.object({
 
 export type UmamiConfig = z.infer<typeof umamiConfigSchema>;
 export type UmamiDateInput = { startDate?: string; endDate?: string };
-export type UmamiResolvedDateRange = { startDate: string; endDate: string };
-export type UmamiComparisonCoverage = {
+type UmamiResolvedDateRange = { startDate: string; endDate: string };
+type UmamiComparisonCoverage = {
   requestedStartDate: string;
   requestedEndDate: string;
   availableStartDate: string | null;

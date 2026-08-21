@@ -71,8 +71,13 @@ export const getBeplyAnalyticsOverviewTool = {
     try {
       const result = await UmamiAnalyticsService.getOverview(args);
       const range = result.request.resolvedDateRange;
+      const coverage = result.request.comparisonCoverage;
+      const comparisonWarning =
+        coverage && !coverage.complete
+          ? ` Comparison warning: ${coverage.availableDays} of ${coverage.expectedDays} previous-period days are available; do not treat the comparison as complete.`
+          : "";
       return mcpResponse({
-        text: `Beply Analytics for ${range.startDate} through ${range.endDate}: ${result.current.pageviews} pageviews, ${result.current.visitors} visitors, and ${result.current.visits} visits. Cookie-free aggregate measurement.`,
+        text: `Beply Analytics for ${range.startDate} through ${range.endDate}: ${result.current.pageviews} pageviews, ${result.current.visitors} visitors, and ${result.current.visits} visits. Cookie-free aggregate measurement.${comparisonWarning}`,
         meta: buildProjectMeta(context, args.projectId),
         structuredContent: result,
       });

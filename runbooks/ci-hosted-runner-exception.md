@@ -7,12 +7,12 @@ not establish that role. It grants no additional deployment or publication autho
 
 The existing `ubuntu-latest` jobs are retained for this one security candidate:
 
-| Workflow | Jobs | Existing effect retained |
-| --- | --- | --- |
-| `ci.yml` | `ci`, `docker-build` | Tests, worker/web builds; Docker AMD64 validation without push or load |
-| `pr-preview.yml` | `preview` | Existing upstream-only, same-repository guard; inert for the Beply fork |
-| `sourcemaps.yml` | `upload` | Existing push-to-main trigger and repository guard |
-| `docker-image.yml` | `docker` | Existing Beply-only GHCR publisher; AMD64 and ARM64 |
+| Workflow           | Jobs                 | Existing effect retained                                                |
+| ------------------ | -------------------- | ----------------------------------------------------------------------- |
+| `ci.yml`           | `ci`, `docker-build` | Tests, worker/web builds; Docker AMD64 validation without push or load  |
+| `pr-preview.yml`   | `preview`            | Existing upstream-only, same-repository guard; inert for the Beply fork |
+| `sourcemaps.yml`   | `upload`             | Existing push-to-main trigger and repository guard                      |
+| `docker-image.yml` | `docker`             | Existing Beply-only GHCR publisher; AMD64 and ARM64                     |
 
 ARC is the canonical baseline. Moving public untrusted pull-request code to the
 shared ARC set requires a verified isolation and permissions contract; this
